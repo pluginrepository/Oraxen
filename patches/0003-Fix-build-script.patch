@@ -1,0 +1,63 @@
+From d43ea60b611984b962b9d3abcc91daa97154323f Mon Sep 17 00:00:00 2001
+From: Ryder Belserion <no-reply@ryderbelserion.com>
+Date: Fri, 31 Mar 2023 00:54:08 -0400
+Subject: [PATCH] Fix build script
+
+---
+ build.gradle.kts | 12 ++++--------
+ 1 file changed, 4 insertions(+), 8 deletions(-)
+
+diff --git a/build.gradle.kts b/build.gradle.kts
+index 8be83dcd..5d0ef427 100644
+--- a/build.gradle.kts
++++ b/build.gradle.kts
+@@ -12,10 +12,6 @@ plugins {
+     id("net.minecrell.plugin-yml.bukkit") version "0.5.3" // Generates plugin.yml
+ }
+ 
+-val pluginVersion: String by project
+-group = "io.th0rgal"
+-version = pluginVersion
+-
+ java {
+     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+ }
+@@ -89,7 +85,7 @@ tasks {
+ 
+     processResources {
+         filesNotMatching(listOf("**/*.png", "**/*.ogg", "**/models/**", "**/textures/**", "**/font/**.json", "**/plugin.yml")) {
+-            expand(mapOf(project.version.toString() to pluginVersion))
++            expand(mapOf(project.version.toString() to rootProject.version))
+         }
+         duplicatesStrategy = DuplicatesStrategy.INCLUDE
+         filteringCharset = Charsets.UTF_8.name()
+@@ -119,7 +115,7 @@ tasks {
+             attributes(
+                 mapOf(
+                     "Built-By" to System.getProperty("user.name"),
+-                    "Version" to pluginVersion,
++                    "Version" to rootProject.version,
+                     "Build-Timestamp" to SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss.SSSZ").format(Date.from(Instant.now())),
+                     "Created-By" to "Gradle ${gradle.gradleVersion}",
+                     "Build-Jdk" to "${System.getProperty("java.version")} ${System.getProperty("java.vendor")} ${System.getProperty("java.vm.version")}",
+@@ -127,7 +123,7 @@ tasks {
+                 )
+             )
+         }
+-        archiveFileName.set("oraxen-${pluginVersion}.jar")
++        archiveFileName.set("oraxen-${rootProject.version}.jar")
+         minimize()
+     }
+ 
+@@ -138,7 +134,7 @@ tasks {
+ bukkit {
+     load = net.minecrell.pluginyml.bukkit.BukkitPluginDescription.PluginLoadOrder.POSTWORLD
+     main = "io.th0rgal.oraxen.OraxenPlugin"
+-    version = pluginVersion
++    version = rootProject.version.toString()
+     name = "Oraxen"
+     apiVersion = "1.18"
+     authors = listOf("th0rgal", "boy0000")
+-- 
+2.40.0.windows.1
+
