@@ -1,0 +1,45 @@
+From c5dfd8d4d6f3cbc0b73cda637aa236312f603286 Mon Sep 17 00:00:00 2001
+From: Ryder Belserion <no-reply@ryderbelserion.com>
+Date: Fri, 31 Mar 2023 00:31:39 -0400
+Subject: [PATCH] Replace their maven publication
+
+---
+ build.gradle.kts | 21 +++++++++++++++++++--
+ 1 file changed, 19 insertions(+), 2 deletions(-)
+
+diff --git a/build.gradle.kts b/build.gradle.kts
+index d30b4740..8be83dcd 100644
+--- a/build.gradle.kts
++++ b/build.gradle.kts
+@@ -153,9 +153,26 @@ bukkit {
+ }
+ 
+ publishing {
++    repositories {
++        maven("https://repo.crazycrew.us/api") {
++            name = "crazycrew"
++            // Used for locally publishing.
++            credentials(PasswordCredentials::class)
++
++            credentials {
++                username = System.getenv("REPOSITORY_USERNAME")
++                password = System.getenv("REPOSITORY_PASSWORD")
++            }
++        }
++    }
++
+     publications {
+-        register<MavenPublication>("maven") {
+-            from(components.getByName("java"))
++        create<MavenPublication>("maven") {
++            groupId = rootProject.group.toString()
++            artifactId = "${rootProject.name.toLowerCase()}-api"
++            version = rootProject.version.toString()
++
++            from(components["java"])
+         }
+     }
+ }
+-- 
+2.40.0.windows.1
+
