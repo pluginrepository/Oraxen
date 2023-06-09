@@ -1,4 +1,4 @@
-From c5dfd8d4d6f3cbc0b73cda637aa236312f603286 Mon Sep 17 00:00:00 2001
+From 9939fcd5193046a1e7f0d3d0f2da795bd9ee5f27 Mon Sep 17 00:00:00 2001
 From: Ryder Belserion <no-reply@ryderbelserion.com>
 Date: Fri, 31 Mar 2023 00:31:39 -0400
 Subject: [PATCH] Replace their maven publication
@@ -8,10 +8,10 @@ Subject: [PATCH] Replace their maven publication
  1 file changed, 19 insertions(+), 2 deletions(-)
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index d30b4740..8be83dcd 100644
+index 3b1ae876..d2427b5c 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
-@@ -153,9 +153,26 @@ bukkit {
+@@ -154,9 +154,26 @@ bukkit {
  }
  
  publishing {
@@ -41,5 +41,5 @@ index d30b4740..8be83dcd 100644
      }
  }
 -- 
-2.40.0.windows.1
+2.40.1.windows.1
 
